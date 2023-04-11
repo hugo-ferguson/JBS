@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JBS | Edit Task</title>
+    <link rel="icon" href="Images/favicon.ico">
+    <link rel="stylesheet" href="CSS/styles2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">  
+  </head>
+  <body>
+    <div class="fixed-header">
+      <header class="fixed">
+          <img src="images/logo-hi-res-white.png" id="logo">
+      </header>
+    </div>
+    <form action="/Users/jackwigney/Desktop/group-24/Projects/data.txt">
+      <div class="row">
+        <div class="col-25">
+          <label for="taskname">Task Name:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="taskname" placeholder="Enter a short and descriptive task name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="type">Choose type:</label>
+        </div>
+        <div class="col-75">
+          <select id="type" name="type" value="default">
+            <option value="default">--</option>
+            <option value="bug">Bug</option>
+            <option value="story">Story</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="tag">Choose tag:</label>
+        </div>
+        <div class="col-75">
+          <select id="tag" name="tag" value="default">
+            <option value="default">--</option>
+            <option value="core">Core</option>
+            <option value="testing">Testing</option>
+            <option value="ui">UI</option>
+        </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="storypoints">Choose Story Points:</label>
+        </div>
+        <div class="col-75">
+          <select id="storypoints" name="storypoints" value="default">
+            <option value="default">--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="priority">Priority:</label>
+        </div>
+        <div class="col-75">
+          <select id="priority" name="priority" value="default">
+            <option value="default">--</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="description">Description:</label>
+        </div>
+        <div class="col-75">
+          <textarea id="description" rows="5" placeholder="Enter a full detailed description of the task"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="status">Task Status:</label>
+        </div>
+        <div class="col-75">
+          <select id="status" name="status" value="notstarted">
+            <option value="notstarted">Not Started</option>
+            <option value="inprogress">In Progress</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <input type="submit" class="submit">
+      </div>
+    </form>
+  </body>
+</html>

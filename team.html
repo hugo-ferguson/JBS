@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JBS | Team Members</title>
+    <link rel="icon" href="Images/logo-hi-res-white.png">
+    <link rel="stylesheet" href="CSS/styles2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body> 
+    <div class="fixed-header" style="z-index: 2;">
+      <header class="fixed">
+        <div class="dropdown-class">
+          <button class="dropdown">☰</button>
+          <nav class="menu">
+            <ul>
+              <li>
+                <button onclick="window.location.href='taskbacklog.html'" class="listitem">Task Backlog</button>
+              </li>
+              <li>
+                <button onclick="window.location.href='sprints.html'" class="listitem">Sprints</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <span id="header-title">Team Members</span>
+        <img src="images/logo-hi-res-white.png" id="logo">
+    </header>
+    </div>
+    <!--    Page Body, Team Member Card here    -->
+    <div class="content-body" style="padding-top: 150px;">
+        <button class="add-btn" id="new-team-member">+</button>
+        <button class="contribution-btn" id="total-contribution">Total Contribution</button>
+        <button class="contribution-btn" id="average-contribution">Average Contribution</button>
+        <div class="team-member-box">
+            <div class="team-member">
+              <div class="team-member-colour-bar"></div>
+              <div class="team-member-card-name">Jack
+                <div class="material-symbols-outlined" id="delete-team-member-icon">delete</div>
+              </div>
+              <div class="team-member-card-email">jack.wigney@gmail.com</div>
+            </div>
+        </div>
+    </div>
+    <!---   Create New Team Member Modal   -->
+    <div class="modal" id="create-team-member-modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-header">Create Team Member
+                <span class="close-modal" id="close-new-team-member-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="left-third">
+                    <div id="team-member-name-div" class="input-div">
+                      <p>
+                        <label for="team-member-name-input">Name:</label>
+                      </p>
+                      <p class="line"></p>
+                      <p>
+                        <input type="text" id="team-member-name-input" placeholder="Enter name here:">
+                      </p>
+                    </div>
+                </div>
+                <div class="middle-third">
+                    <div id="team-member-email-div" class="input-div">
+                      <p>
+                        <label for="team-member-email-input">Email:</label>
+                      </p>
+                      <p class="line"></p>
+                      <p>
+                        <input type="text" id="team-member-email-input" placeholder="Enter email here:">
+                      </p>
+                    </div>
+                </div>
+                <div class="right-third">
+                    <div id="team-member-color-div" class="input-div">
+                      <p>
+                        <label for="team-member-email-input">Color:</label>
+                      </p>
+                      <p class="line"></p>
+                      <p>
+                        <input type="color" id="team-member-color-input">
+                      </p>
+                    </div>
+                </div>
+                <button class="save-team-member-btn" id="save-team-member-btn">OK &#10003</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!--    Team Member Overview Modal    -->
+    <div class="modal" id="team-member-overview-modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-header">Team Member Summary
+                <span class="close-modal" id="close-team-member-overview-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="left-column">
+                    <div id="team-member-name-div" class="team-member-div">
+                      <p>
+                        <label id="team-member-name-label">Team Member Name</label>
+                      </p>
+                      <p class="line"></p>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div id="team-member-total-hours-div" class="team-member-div">
+                      <p>
+                        <label id="team-member-email">Team Member Email</label>
+                      </p>
+                      <p class="line"></p>
+                    </div>
+                </div>
+                <div id="team-member-hours-div">
+                  <canvas id="team-member-hours">
+                    <!-- Team Member hours graph -->
+                  </canvas>
+                </div>
+                <div class="left-column">
+                    <div id="sprint-select-div" class="input-div">
+                      <p>
+                        <label for="sprint-select-input">Showing Contribution For:</label>
+                      </p>
+                      <p class="line"></p>
+                      <p>
+                        <select name="sprint-select" value="default">
+                            <option value="default" disabled="true">Select Sprint Here</option>
+                            <option value="1">Sprint 1</option>
+                            <option value="2">Sprint 2</option>
+                            <option value="3">Sprint 3</option>
+                        </select>
+                      </p>
+                    </div>
+                </div>
+                <div class="right-column">
+                    <div id="team-member-total-hours-div" class="input-div">
+                      <p>
+                        <label for="team-member-total-hours-input">Total Hours:</label>
+                      </p>
+                      <p class="line"></p>
+                      <p>
+                        <div id="team-member-total-hours-input">69</div>
+                      </p>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!--    Team Member Average Contribution Modal  -->
+    <div class="modal" id="team-member-average-contribution-modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modal-header">Average Contribution
+                <span class="close-modal" id="close-team-member-average-contribution-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+              <div class="contribution-filter-bar">
+                <div id="sprint-contribution-select-div" class="third-input-div">
+                  <p>
+                    <label for="sprint-contribution-select-input">Viewing Sprint:</label>
+                  </p>
+                  <p class="line"></p>
+                  <p>
+                    <select name="sprint-contribution-select" value="default">
+                        <option value="default" disabled="true"11>Select Sprint Here</option>
+                        <option value="1">Sprint 1</option>
+                        <option value="2">Sprint 2</option>
+                        <option value="3">Sprint 3</option>
+                    </select>
+                  </p>
+                </div>
+                <div id="sprint-start-date-div" class="third-input-div">
+                  <p>
+                    <label for="sprint-start-date-input">Select Start Date:</label>
+                  </p>
+                  <p class="line"></p>
+                  <p>
+                    <input type="date">
+                  </p>
+                </div>
+                <div id="sprint-end-date-div" class="third-input-div">
+                  <p>
+                    <label for="sprint-end-date-input">Select End Date:</label>
+                  </p>
+                  <p class="line"></p>
+                  <p>
+                    <input type="date">
+                  </p>
+                </div>
+              </div>
+              <div style="height: 200px;">Generate team members here</div>
+              <button class="contribution-btn" id="total-contribution2">Total Contribution</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!--    Team Member Total Contribution Modal  -->
+    <div class="modal" id="team-member-total-contribution-modal">
+      <div class="modal-content">
+          <div class="modal-header" id="modal-header">Total Contribution
+              <span class="close-modal" id="close-team-member-total-contribution-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="contribution-filter-bar">
+              <div id="sprint-contribution-select-div" class="third-input-div">
+                <p>
+                  <label for="sprint-contribution-select-input">Viewing Sprint:</label>
+                </p>
+                <p class="line"></p>
+                <p>
+                  <select name="sprint-contribution-select" value="default">
+                      <option value="default" disabled="true"11>Select Sprint Here</option>
+                      <option value="1">Sprint 1</option>
+                      <option value="2">Sprint 2</option>
+                      <option value="3">Sprint 3</option>
+                  </select>
+                </p>
+              </div>
+              <div id="sprint-start-date-div" class="third-input-div">
+                <p>
+                  <label for="sprint-start-date-input">Select Start Date:</label>
+                </p>
+                <p class="line"></p>
+                <p>
+                  <input type="date">
+                </p>
+              </div>
+              <div id="sprint-end-date-div" class="third-input-div">
+                <p>
+                  <label for="sprint-end-date-input">Select End Date:</label>
+                </p>
+                <p class="line"></p>
+                <p>
+                  <input type="date">
+                </p>
+              </div>
+            </div>
+            <div style="height: 200px;"> Generate team members here</div>
+            <button class="contribution-btn" id="average-contribution2">Average Contribution</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <script src="JS/config.js"></script>
+  <script src="JS/shared.js"></script>
+  <script src="JS/teamMembers.js"></script>
+    <script src="JS/teamModal.js"></script>
+  </body>
+</html>

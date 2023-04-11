@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JBS | Task Backlog</title>
+    <link rel="icon" href="Images/logo-hi-res-white.png">
+    <link rel="stylesheet" href="CSS/styles2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+  </head>
+  <body> 
+    <div class="fixed-header" style="z-index: 2;">
+      <header class="fixed">
+        <div class="dropdown-class">
+          <button class="dropdown">☰</button>
+          <nav class="menu">
+            <ul>
+              <li>
+                <button onclick="window.location.href='team.html'" class="listitem">Team Members</button>
+              </li>
+              <li>
+                <button onclick="window.location.href='sprints.html'" class="listitem">Sprints</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <span id="header-title">Product Backlog</span>
+        <img src="images/logo-hi-res-white.png" id="logo">
+    </header>
+    </div>
+    <div class="task-modal" id="new-task-modal">
+      <div class="modal-content">
+        <div class="modal-header" id="modal-header">Create a task
+          <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="left-column">
+            <div id="task-name-div" class="input-div">
+              <p>
+                <label for="task-name-input">Task Name:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <input type="text" id="task-name-input" placeholder="Enter task name here:">
+              </p>
+            </div>
+            <div id="story-points-div" class="input-div">
+              <p>
+                <label for="story-points-input">Story Points:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <select id="story-points-input" name="story-points">
+                  <option value="" disabled selected>Select story points here:</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+              </p>
+            </div>
+            <div id="priority-div" class="input-div">
+              <p>
+                <label for="priority-input">Priority:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <select id="priority-input" name="priority">
+                  <option value="" disabled selected>Select priority here:</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </p>
+            </div>
+            <div id="type-div" class="input-div">
+              <p>
+                <label for="type-input">Type:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <select id="type-input" name="type">
+                  <option value="" disabled selected>Select type here:</option>
+                  <option value="user-story">User Story</option>
+                  <option value="bug">Bug</option>
+                </select>
+              </p>
+            </div>
+          </div>
+          <div class="right-column">
+            <div id="tag-div" class="input-div">
+              <p>
+                <label for="tag-input">Tag:</label>
+              </p>
+              <p class="line"></p>
+              <div>
+                <button class="core-btn" id="core-tag">Core</button>
+                <button class="testing-btn" id="testing-tag">Testing</button>
+                <button class="ui-btn" id="ui-tag">UI</button>
+              </div>
+            </div>
+            <div id="description-div" class="input-div">
+              <p>
+                <label for="description-input">Description:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+              <textarea id="description-input" placeholder="Type description here:"></textarea>
+              </p>
+            </div>
+            <button class="submit-btn" id="submit-tag">OK ✓</button>
+            <button class="clear-btn" id="clear-tag">Clear</button> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="task-modal" id="edit-task-modal">
+      <div class="modal-content">
+        <div class="modal-header" id="view-name">Task name
+          <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="view-left">
+            <div class="left-section-head">Description</div>
+            <div id="view-description" class="left-section-body">Sample description</div>
+          </div>
+          <div class="view-right">
+            <div class="right-section">
+              <div class="right-section-head">Tag</div>
+              <div class="right-section-body" id="view-task-tag">Testing</div>
+            </div>
+            <div class="right-section">
+              <div class="right-section-head">Story Points</div>
+              <div class="right-section-body" id="view-story-points">9</div>
+            </div>
+            <div class="right-section">
+              <div class="right-section-head">Priority</div>
+              <div class="right-section-body" id="view-priority">High</div>
+            </div>
+            <div class="right-section">
+              <div class="right-section-head">Type</div>
+              <div class="right-section-body" id="view-type">User Story</div>
+            </div>
+            <div class="right-buttons">
+              <button class="delete-btn" id="delete-btn">Delete</button>
+              <button class="edit-btn" id="edit-btn">Edit &#9998;</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="filter-bar">
+      <span style="width: 10%; margin: 10px 20px;"><label for="filter-selection">Filter by:</label></span>
+      <span>
+        <select id="filter-selection" name="filter-selection" value="filter-all" onchange="filterSelected()">
+          <option class="filter-option" id="filter-all">All</option>
+          <option class="filter-option" id="filter-core">Core</option>
+          <option class="filter-option" id="filter-testing">Testing</option>
+          <option class="filter-option" id="filter-ui">UI</option>
+        </select>
+      </span>
+      <span id="Reset" style="float: right; margin: 10px; cursor: pointer;" onclick="sortBool()">Reset</span>
+    </div>
+    <div class="content-body">
+        <button class="add-btn" id="newtask">+</button>
+      <div class="board-layout">
+        <div id='board-lists' class="board-lists" ondrop="dropIt(event)" ondragover="allowDrop(event)">
+            <!-- Task cards display goes under this div id (function in taskbacklog.js) -->
+        </div>
+      </div>
+    </div>
+    <script src="JS/config.js"></script>
+    <script src="JS/shared.js"></script>
+    <script src="JS/modal.js"></script>
+    <script src="JS/taskbacklog.js"></script>
+    <script src="JS/arrangeTasks.js"></script>
+  </body>
+</html>

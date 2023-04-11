@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>JBS | Sprints</title>
+  <link rel="icon" href="Images/logo-hi-res-white.png">
+  <link rel="stylesheet" href="CSS/styles2.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="fixed-header" style="z-index: 2;">
+    <header class="fixed">
+      <div class="dropdown-class">
+        <button class="dropdown">☰</button>
+        <nav class="menu">
+          <ul>
+            <li><button onclick="window.location.href='taskbacklog.html'" class="listitem">Task Backlog</button></li>
+            <li><button onclick="window.location.href='team.html'" class="listitem">Team Members</button></li>
+          </ul>
+        </nav>
+      </div>
+      <span id="header-title">Sprints</span>
+      <img src="images/logo-hi-res-white.png" id="logo">
+    </header>
+  </div>
+  <div class="content-body">
+    <button class="add-btn" id="new-sprint">+</button>
+    <!---
+        <div class="modal" id="sprint-progress-modal">
+          <div class="modal-content">
+            <div class="modal-header" id="modal-header">Sprint name - progress
+              <span class="close-modal" id="close-sprint-tasks">&times;</span>
+            </div>
+            <div class="modal-body">
+              <h1>Sample text</h1>
+            </div>
+          </div>
+        </div>
+        --->
+    <div class="sprint-box" id="sprint-box">
+      <!-- sprints go here -->
+      <button id="view-sprint-tasks">Button</button>
+    </div>
+  </div>
+  <div class="modal" id="new-sprint-modal">
+    <div class="modal-content">
+      <div class="modal-header" id="modal-header">Create a sprint
+        <span class="close-modal" id="close-new-sprint">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="left-column">
+          <div id="sprint-name-div" class="input-div">
+            <p>
+              <label for="sprint-name-input">Sprint Name:</label>
+            </p>
+            <p class="line"></p>
+            <p>
+              <input type="text" id="sprint-name-input" placeholder="Enter sprint name here:">
+            </p>
+          </div>
+          <div id="sprint-status-div" class="input-div">
+            <p>
+              <label for="sprint-status-input">Status:</label>
+            </p>
+            <p class="line"></p>
+            <p>
+              <select id="sprint-status-input" name="sprint-status" value="not-started">
+                <option value="not-started">Not Started</option>
+                <option value="in-progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </p>
+          </div>
+        </div>
+        <div class="right-column">
+          <div id="sprint-start-date-div" class="input-div">
+            <p>
+              <label for="sprint-start-date-input">Sprint Start Date:</label>
+            </p>
+            <p class="line"></p>
+            <p>
+              <input type="date" id="sprint-start-date-input">
+            </p>
+          </div>
+          <div id="sprint-end-date-div" class="input-div">
+            <p>
+              <label for="sprint-end-date-input">Sprint End Date:</label>
+            </p>
+            <p class="line"></p>
+            <p>
+              <input type="date" id="sprint-end-date-input">
+            </p>
+          </div>
+          <button class="sprint-btn" id="save-sprint-btn">Save</button>
+          <button class="sprint-btn" id="delete-sprint-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="sprint-tasks-modal">
+    <div class="modal-content">
+      <div class="modal-header" id="sprint-task-name">Sprint name - tasks
+        <span class="close-modal" id="close-sprint-tasks">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="sprint-tasks-row">
+
+          <!-- not started section -->
+          <div class="sprint-tasks-column">
+            <div class="sprint-tasks-column-header" id="not-started">Not Started</div>
+            <!-- tasks section -->
+            <div class="sprint-tasks-box" id="sprint-tasks-box1" ondrop="dropIt(event)" ondragover="allowDrop(event)">
+              <div class="sprint-task" id="sprint-task1" draggable="true" ondragstart="dragStart(event)">
+                <div class="not-started-sprint-task"></div>
+                <div class="sprint-task-name">Task 1</div>
+              </div>
+              <div class="sprint-task" id="sprint-task6" draggable="true" ondragstart="dragStart(event)">
+                <div class="not-started-sprint-task"></div>
+                <div class="sprint-task-name">Task 6</div>
+              </div>
+            </div>
+            <!-- tasks section end -->
+          </div>
+
+          <!-- in progress section -->
+          <div class="sprint-tasks-column">
+            <div class="sprint-tasks-column-header" id="in-progress">In Progress</div>
+            <!-- tasks section -->
+            <div class="sprint-tasks-box" id="sprint-tasks-box2" ondrop="dropIt(event)" ondragover="allowDrop(event)">
+              <div class="sprint-task" id="sprint-task2" draggable="true" ondragstart="dragStart(event)">
+                <div class="in-progress-sprint-task"></div>
+                <div class="sprint-task-name">Task 2</div>
+              </div>
+              <div class="sprint-task" id="sprint-task5" draggable="true" ondragstart="dragStart(event)">
+                <div class="in-progress-sprint-task"></div>
+                <div class="sprint-task-name">Task 5</div>
+              </div>
+            </div>
+            <!-- tasks section end -->
+            <button class="sprint-progress-btn" id="sprint-tasks-progress-btn">PROGRESS</button>
+          </div>
+
+          <!-- completed section -->
+          <div class="sprint-tasks-column">
+            <div class="sprint-tasks-column-header" id="completed">Completed</div>
+            <!-- tasks section -->
+            <div class="sprint-tasks-box" id="sprint-tasks-box3" ondrop="dropIt(event)" ondragover="allowDrop(event)">
+              <div class="sprint-task" id="sprint-task3" draggable="true" ondragstart="dragStart(event)">
+                <div class="completed-sprint-task"></div>
+                <div class="sprint-task-name">Task 3</div>
+              </div>
+              <div class="sprint-task" id="sprint-task4" draggable="true" ondragstart="dragStart(event)">
+                <div class="completed-sprint-task"></div>
+                <div class="sprint-task-name">Task 4</div>
+              </div>
+            </div>
+            <!-- tasks section end -->
+            <button class="add-task-btn" id="add-task">+</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="edit-task-in-sprint">
+    <div class="modal-content">
+      <div class="modal-header" id="modal-header">Edit Task in Sprint
+        <span class="close-modal" id="close-edit-task-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="ed-task-task-name" id="edit-modal-task-name">
+          Task Name
+        </div>
+        <div class="edit-task-in-sprint-row">
+          <div class="edit-task-in-sprint-column" style="float: left;">
+            <div id="edit-task-in-sprint-task-status" class="input-div">
+              <p>
+                <label for="sprint-name-input">Task Status:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <select id="edit-task-in-sprint-task-status-select" value="not-started">
+                  <option value="not-started">Not Started</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </p>
+            </div>
+            <div id="task-assigned-to" class="input-div">
+              <p>
+                <label for="task-assigned-to-input">Assigned to:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <input type="text" id="task-assigned-to-input" placeholder="Enter name here:">
+                <select id="task-assigned-to-input">
+                  <!---->
+                </select>
+              </p>
+            </div>
+            <div id="task-hours" class="input-div">
+              <p>
+                <label for="task-log-hours">Log hours:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <input type="text" id="log-hours-time" placeholder="Log hours here:" style="width: 45%; float:left;">
+                <input type="date" id="log-hours-date" style="width: 45%; float:right;">
+              </p>
+            </div>
+          </div>
+          <div class="edit-task-in-sprint-column" style="float: left; margin-left: 1.5%;">
+            <div id="task-story-points" class="input-div">
+              <p>
+                <label for="task-story-points-input">Story points:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <select id="story-points-input" name="story-points">
+                  <option value="" disabled selected>Select story points here:</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                </select>
+              </p>
+            </div>
+            <div id="priority-div" class="input-div">
+              <p>
+                <label for="priority-input">Priority:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <select id="priority-input" name="priority">
+                  <option value="" disabled selected>Select priority here:</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="critical">Critical</option>
+                </select>
+              </p>
+            </div>
+            <div id="task-total-hours" class="input-div">
+              <p>
+                <label for="task-total-hours">Total Hours:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+              <div id="task-total-hours-text">Total hours</div>
+              </p>
+            </div>
+            <div id="save-sprint-task-btn">
+              <button class="task-modal-btn" onclick="saveTaskInSprint()">OKAY</button>
+            </div>
+          </div>
+          <div class="edit-task-in-sprint-column" style="float: right;">
+            <div class="input-div">
+              <p>
+                <label for="task-description">Task description:</label>
+              </p>
+              <p class="line"></p>
+              <p>
+                <textarea id="task-description-text" style="text-align:left;">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Nullam sit amet ligula auctor, tempus diam sed, luctus ipsum. 
+                    Nulla a nunc in felis sodales dapibus. Nam feugiat eu mi in maximus. 
+                    Nullam imperdiet odio in faucibus cursus. 
+                    Donec imperdiet tellus eu ullamcorper tincidunt. 
+                    Sed non velit augue. Cras libero sem, congue nec elementum nec, vestibulum at nibh. 
+                    Nunc gravida, nisl eu dictum malesuada, nisi ex hendrerit neque, sed suscipit urna mi ut tortor. 
+                    In hendrerit pharetra lacus. 
+                    Curabitur placerat placerat neque, et scelerisque urna rhoncus nec. 
+                  </textarea>
+              </p>
+            </div>
+            <div id="remove-sprint-task-btn">
+              <button class="task-modal-btn" style="padding: 20px;" onclick="removeTaskFromSprint()">REMOVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id="sprint-progress-modal">
+    <div class="modal-content">
+      <div class="modal-header" id="modal-header">Progress
+        <span class="close-modal" id="close-progress-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="sprint-progress-row">
+          <div class="left-progress-column">
+            <div class="burndown-chart-header">
+              Burndown Chart
+            </div>
+            <div class="burndown-chart-container">
+              <canvas id="burndown-chart">
+
+              </canvas>
+            </div>
+          </div>
+          <div class="right-progress-column">
+            <div class="hours-on-task">
+              Hours On Task
+            </div>
+            <div class="task-container" id="hours-on-task">
+              <!-- Tasks go here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal" id="sprint-hours-on-task-modal">
+    <div class="modal-content">
+      <div class="modal-header" id="modal-header">Time on task
+        <span class="close-modal" id="close-hours-on-task-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="time-on-task-name">
+          <!-- task name goes here -->
+        </div>
+        <div class="time-on-task-left-column">
+          <div class="time-on-task-left-column-field">
+            <div class="time-on-task-left-column-header">
+              STORY POINTS
+            </div>
+            <p class="line"></p>
+            <div class="time-on-task-left-column-body" id="task-hours-story-points">
+              9
+            </div>
+          </div>
+          <div class="time-on-task-left-column-field">
+            <div class="time-on-task-left-column-header">
+              PRIORITY
+            </div>
+            <p class="line"></p>
+            <div class="time-on-task-left-column-body" id="task-hours-priority">
+              CRITICAL
+            </div>
+          </div>
+          <div class="time-on-task-left-column-field">
+            <div class="time-on-task-left-column-header">
+              ASSIGNED TO
+            </div>
+            <p class="line"></p>
+            <div class="time-on-task-left-column-body" id="task-hours-assigned">
+              Jack Burridge
+            </div>
+          </div>
+        </div>
+        <div class="time-on-task-right-column">
+          <div class="time-on-task-right-column-header">
+            LOGGED HOURS
+          </div>
+          <div class="time-on-task-right-column-body" id="task-hours-logged">
+            <!--hours table and total time goes here  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="JS/config.js"></script>
+  <script src="JS/shared.js"></script>
+  <script src="JS/sprints.js"></script>
+  <script src="JS/modals/sprint-modals.js"></script>
+  <script src="JS/sprint-tasks-draggable.js"></script>
+  <script src="JS/sprint-kanban.js"></script>
+  <script src="JS/arrangeTasks.js"></script>
+</body>
+
+</html>
